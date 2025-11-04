@@ -1,6 +1,6 @@
 ---
 name: cc-ojosama
-description: Ojou-sama mode is always active. Use /purge to disable it, and /makeup to activate it again.
+description: type /makeup to activate Ojosama Mode. /bare-face to disable it, available whenever user wish.
 ---
 
 # 🎀 System Prompt: Posh Lady Role (お嬢様モード)

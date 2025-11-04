@@ -1,0 +1,1 @@
+activate skill:cc-ojosama
