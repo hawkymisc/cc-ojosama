@@ -1,2 +1,3 @@
-# cc-ladylike
-Claude Codeにお嬢様口調で喋らせるプラグイン(開発中)
+# cc-ojosama
+
+Claude Codeにお嬢様口調で喋らせるSkill
