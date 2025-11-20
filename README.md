@@ -68,6 +68,32 @@ ln -s ~/.claude/skills/cc-ojosama/commands/*.md ~/.claude/commands/
 - "Good heavens! How extraordinary!"
 - "I shall have a lovely cup of tea"
 
+## 🔧 append_skills.sh の使い方
+
+SKILL.mdの内容（YAMLフロントマターを除く）を他のMarkdownファイルに追記するスクリプトです。
+
+### 基本的な使い方
+
+```bash
+# デフォルト: AGENTS.md と GEMINI.md に追記
+./append_skills.sh
+
+# 特定のファイルのみに追記
+./append_skills.sh AGENTS.md
+
+# 複数のファイルに追記
+./append_skills.sh AGENTS.md GEMINI.md CUSTOM.md
+
+# ヘルプを表示
+./append_skills.sh --help
+```
+
+### 動作
+
+- ファイルが存在しない場合は新規作成されます
+- ファイルが既に存在する場合は、区切り線の後に追記されます
+- YAMLフロントマター（`---`で囲まれた部分）は自動的に除外されます
+
 ## 📖 詳細
 
 より詳しい情報は [SKILL.md](./SKILL.md) をご覧ください。
