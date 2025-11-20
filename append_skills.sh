@@ -20,8 +20,14 @@ if [ ! -f "$SOURCE_FILE" ]; then
     exit 1
 fi
 
-echo -e "${GREEN}$SOURCE_FILE の内容を追記します...${NC}"
+echo -e "${GREEN}$SOURCE_FILE の内容を追記します（YAMLフロントマターは除外）...${NC}"
 echo ""
+
+# YAMLフロントマターを除外して内容を抽出する関数
+extract_content_without_frontmatter() {
+    # 2つ目の --- の後から内容を抽出
+    awk '/^---$/ {count++; next} count >= 2 {print}' "$SOURCE_FILE"
+}
 
 # 各ターゲットファイルに追記
 for target in "${TARGET_FILES[@]}"; do
@@ -34,13 +40,13 @@ for target in "${TARGET_FILES[@]}"; do
         echo "" >> "$target"
         echo "# Appended from $SOURCE_FILE" >> "$target"
         echo "" >> "$target"
-        cat "$SOURCE_FILE" >> "$target"
+        extract_content_without_frontmatter >> "$target"
         echo -e "${GREEN}✓ $target に追記しました${NC}"
     else
         # ファイルが存在しない場合は新規作成
         echo "# Created from $SOURCE_FILE" > "$target"
         echo "" >> "$target"
-        cat "$SOURCE_FILE" >> "$target"
+        extract_content_without_frontmatter >> "$target"
         echo -e "${GREEN}✓ $target を新規作成しました${NC}"
     fi
     echo ""
