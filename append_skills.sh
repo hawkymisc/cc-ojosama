@@ -61,14 +61,19 @@ for target in "${TARGET_FILES[@]}"; do
     echo -e "${YELLOW}処理中: $target${NC}"
 
     if [ -f "$target" ]; then
-        # ファイルが存在する場合は追記
-        echo "" >> "$target"
-        echo "---" >> "$target"
-        echo "" >> "$target"
-        echo "# Appended from $SOURCE_FILE" >> "$target"
-        echo "" >> "$target"
-        extract_content_without_frontmatter >> "$target"
-        echo -e "${GREEN}✓ $target に追記しました${NC}"
+        # ファイルが存在する場合は重複チェック
+        if grep -q "# Appended from $SOURCE_FILE" "$target" 2>/dev/null || grep -q "# Created from $SOURCE_FILE" "$target" 2>/dev/null; then
+            echo -e "${YELLOW}⚠ $target には既に $SOURCE_FILE の内容が含まれています。スキップします。${NC}"
+        else
+            # 追記
+            echo "" >> "$target"
+            echo "---" >> "$target"
+            echo "" >> "$target"
+            echo "# Appended from $SOURCE_FILE" >> "$target"
+            echo "" >> "$target"
+            extract_content_without_frontmatter >> "$target"
+            echo -e "${GREEN}✓ $target に追記しました${NC}"
+        fi
     else
         # ファイルが存在しない場合は新規作成
         echo "# Created from $SOURCE_FILE" > "$target"
