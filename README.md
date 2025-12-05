@@ -18,7 +18,7 @@ Claude Codeにお嬢様口調で喋らせるスキルです。
 ### 1. リポジトリをクローン
 
 ```bash
-git clone git@github.com:hawkymisc/cc-ojosama-private.git ~/.claude/skills/cc-ojosama
+git clone git@github.com:hawkymisc/cc-ojosama.git ~/.claude/skills/cc-ojosama
 ```
 
 ### 2. コマンドをリンク
